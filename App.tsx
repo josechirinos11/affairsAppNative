@@ -2,13 +2,26 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {  MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
-
+import {  MD3LightTheme as DefaultTheme, PaperProvider, configureFonts, MD2LightTheme, MD3LightTheme } from 'react-native-paper';
+import MenuSuperior from './views/components/MenuSuperior';
 import css from './styles/global';
+//import fontConfig from './fontConfig'; // Asegúrate de que la ruta sea correcta
+
+//import fontConfig from './assests/fonts/fontConfigConfig'
+
+
+
+
+
 const theme = {
   ...DefaultTheme,
+ 
+  //...MD2LightTheme,
   colors: css.colors, // Copy it from the color codes scheme and then use it here
+  
+ 
 };
+
 const Stack = createStackNavigator();
 
 import Login from './views/Login';

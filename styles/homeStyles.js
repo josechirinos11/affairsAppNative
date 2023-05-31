@@ -20,6 +20,18 @@ const homeStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  titulo: {
+    position: 'absolute',
+    top: 0, // Ajusta la posición vertical según tus necesidades
+    left: 16, // Ajusta la posición horizontal según tus necesidades
+    fontSize: 25, // Tamaño de fuente inicial
+    minWidth: 20, // Ancho mínimo del texto
+    maxWidth: 200, // Ancho máximo del texto
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+
+    //color: theme.colors.primary,
+  },
   containerModal: {
     padding: 15,
     position: 'absolute',
@@ -30,10 +42,6 @@ const homeStyles = StyleSheet.create({
     flex: 1,
   },
 
-  buton: {
-    width: '100%',
-    margin: 5,
-  },
   text: {
     color: 'rgb(222, 111, 47)',
     textAlign: 'center',
@@ -43,13 +51,19 @@ const homeStyles = StyleSheet.create({
     textShadowRadius: 5,
   },
   buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingLeft: 5,
-    paddingRight: 5,
-    paddingBottom: 200,
+    flexDirection: 'row',
+    paddingHorizontal: 10, // Ajusta el espacio horizontal entre los botones según tus necesidades
+    paddingBottom: 20, // Ajusta el espacio inferior entre los botones según tus necesidades
+  },
+  buton: {
+    flex: 1, // Distribuye el espacio disponible de manera igual entre los botones
+    margin: 5, // Ajusta el margen entre los botones según tus necesidades
   },
 });
 
