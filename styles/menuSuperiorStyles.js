@@ -3,15 +3,16 @@ import {StyleSheet, Dimensions} from 'react-native';
 import css from './global';
 
 const menuSuperiorStyles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
+  icon: {
+    width: 24,
+    height: 24,
   },
   containerMenu: {
-    paddingRight: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: windowDimensions.width,
+
     backgroundColor: css.colors.onPrimary,
     shadowColor: css.colors.primary,
     shadowOffset: {width: 0, height: 5},
@@ -19,21 +20,20 @@ const menuSuperiorStyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
   },
-  ejemplo: {
+  leftContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    width: '100%',
-    marginTop: 0,
-    paddingVertical: 0,
+    paddingLeft: 5,
+    flex: 1, // Añadir flex: 1 para ocupar el espacio restante
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingRight: 10,
+    flex: 1, // Añadir flex: 1 para ocupar el espacio restante
+    justifyContent: 'flex-end', // Alinear los elementos a la derecha
+  },
 
-    backgroundColor: css.colors.onPrimary,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   titulo: {
     alignItems: 'center',
     paddingLeft: 5,

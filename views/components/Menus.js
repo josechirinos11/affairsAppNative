@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useContext} from 'react';
 import {BottomNavigation, Text, Button, useTheme} from 'react-native-paper';
 import {Image, View, Dimensions} from 'react-native';
 import menuStyles from '../../styles/menuStyles';
@@ -23,22 +23,19 @@ const ClientesIconfocus = () => (
 const ProductosIcon = () => (
   <Image source={require('../../img//producto.png')} style={menuStyles.icon} />
 );
-const ProductosRoute = () => <Text>Productos</Text>;
 
 const ProveedoresIcon = () => (
   <Image source={require('../../img/proveedor.png')} style={menuStyles.icon} />
 );
-const ProveedoresRoute = () => <Proveedores />;
 
 const EmpresasIcon = () => (
   <Image source={require('../../img/empresa.png')} style={menuStyles.icon} />
 );
-const EmpresasRoute = () => <Text>Empresas</Text>;
 
-const Menus = ({setVista}) => {
+const Menus = () => {
   const theme = useTheme();
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
     {
       key: 'clientes',
       title: 'Clientes',
@@ -66,14 +63,16 @@ const Menus = ({setVista}) => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    clientes: Clientes,
-    productos: Productos,
-    proveedores: Proveedores,
-    empresas: Empresas,
+    clientes: () => <Clientes />,
+    productos: () => <Productos />,
+    proveedores: () => <Proveedores />,
+    empresas: () => <Empresas />,
   });
 
   const iratras = () => {
-    setVista('login');
+    console.log('boton');
+    setIndex();
+    //setVista('login');
   };
 
   const buscarToken = () => {

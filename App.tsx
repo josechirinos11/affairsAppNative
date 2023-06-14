@@ -1,74 +1,55 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {  MD3LightTheme as DefaultTheme, PaperProvider, configureFonts, MD2LightTheme, MD3LightTheme } from 'react-native-paper';
+import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import MenuSuperior from './views/components/MenuSuperior';
 import css from './styles/global';
-//import fontConfig from './fontConfig'; // Asegúrate de que la ruta sea correcta
+import AppContext from './AppContext';
 
-//import fontConfig from './assests/fonts/fontConfigConfig'
-
-
-
-
+import CrearCuenta from './views/CrearCuenta';
+import Home from './views/Home';
+import variables from './variables';
 
 const theme = {
   ...DefaultTheme,
- 
-  //...MD2LightTheme,
-  colors: css.colors, // Copy it from the color codes scheme and then use it here
-  
- 
+  colors: css.colors,
 };
 
 const Stack = createStackNavigator();
 
-import Login from './views/Login';
-import CrearCuenta from './views/CrearCuenta';
-import Home from './views/Home'
+const App = () => {
+  const [appVariables, setAppVariables] = useState(variables.VISTA);
 
-
-
-
-
-const App  = () => {
   return (
-    <>
+    <AppContext.Provider value={{ appVariables, setAppVariables }}>
       <PaperProvider theme={theme}>
-      <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home" >
-          <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{
-                  title: "Home",
-                  headerShown: false
-                }}
-              />
-          
-                <Stack.Screen
-                name="CrearCuenta"
-                component={CrearCuenta}
-                options={{
-                  headerShown: false,
-                  title: "Crear Cuenta", 
-                  headerStyle: {
-                    backgroundColor: '#d6dde7'
-                  }, 
-                  headerTintColor: '#fff',
-                  headerTitleStyle: {
-                    fontWeight: 'bold'
-                  }
-                }}
-                
-
-              />
-
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CrearCuenta"
+              component={CrearCuenta}
+              options={{
+                headerShown: false,
+                title: 'Crear Cuenta',
+                headerStyle: {
+                  backgroundColor: '#d6dde7',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
           </Stack.Navigator>
-      </NavigationContainer>
+        </NavigationContainer>
       </PaperProvider>
-    </>
+    </AppContext.Provider>
   );
 };
 

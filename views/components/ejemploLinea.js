@@ -1,154 +1,97 @@
-import React, {useEffect, useRef} from 'react';
-import {View, Animated, Easing, Dimensions, StyleSheet} from 'react-native';
+import * as React from 'react';
+import {BottomNavigation, Text, Button, useTheme} from 'react-native-paper';
+import {Image, View, Dimensions} from 'react-native';
+import menuStyles from '../../styles/menuStyles';
+import MenuSuperior from './MenuSuperior';
+import homeStyles from '../../styles/homeStyles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Clientes from '../pages/Clientes';
+import Productos from '../pages/Productos';
+import Proveedores from '../pages/Proveedores';
+import Empresas from '../pages/Empresas';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
+const ClientesIcon = () => (
+  <Image source={require('../../img/cliente.png')} style={menuStyles.icon} />
+);
+const ClientesIconfocus = () => (
+  <Image source={require('../../img/navegacion.png')} style={menuStyles.icon} />
+);
+//const ClientesRoute = () => <Clientes />;
 
-const PentagonLine = () => {
-  const pointColor = 'rgb(222, 111, 47)';
-  const pointSize = 20;
-  const containerSize = width / 3;
-  const pointDistance = containerSize * Math.sqrt(2);
+const ProductosIcon = () => (
+  <Image source={require('../../img//producto.png')} style={menuStyles.icon} />
+);
 
-  const pointAnimation = useRef(new Animated.Value(0)).current;
+const ProveedoresIcon = () => (
+  <Image source={require('../../img/proveedor.png')} style={menuStyles.icon} />
+);
 
-  useEffect(() => {
-    const animatePoint = () => {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(pointAnimation, {
-            toValue: 1,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 2,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 3,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 4,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 5,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 6,
-            duration: 1000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pointAnimation, {
-            toValue: 0,
-            duration: 0,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-        ]),
-      ).start();
-    };
+const EmpresasIcon = () => (
+  <Image source={require('../../img/empresa.png')} style={menuStyles.icon} />
+);
 
-    animatePoint();
-  }, [pointAnimation]);
+const Menus = () => {
+  const theme = useTheme();
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {
+      key: 'clientes',
+      title: 'Clientes',
+      unfocusedIcon: ClientesIcon,
+      focusedIcon: ClientesIconfocus,
+    },
+    {
+      key: 'productos',
+      title: 'Productos',
+      unfocusedIcon: ProductosIcon,
+      focusedIcon: ClientesIconfocus,
+    },
+    {
+      key: 'proveedores',
+      title: 'Proveedores',
+      unfocusedIcon: ProveedoresIcon,
+      focusedIcon: ClientesIconfocus,
+    },
+    {
+      key: 'empresas',
+      title: 'Empresas',
+      unfocusedIcon: EmpresasIcon,
+      focusedIcon: ClientesIconfocus,
+    },
+  ]);
 
-  const pentagonStyle = {
-    width: pointDistance,
-    height: pointDistance,
-    transform: [{rotate: '0deg'}],
-    position: 'relative',
+  const renderScene = BottomNavigation.SceneMap({
+    clientes: () => <Clientes />,
+    productos: () => <Productos />,
+    proveedores: () => <Proveedores />,
+    empresas: () => <Empresas />,
+  });
+
+  const iratras = () => {
+    setVista('login');
   };
 
-  const pointStyle = {
-    position: 'absolute',
-    width: pointSize,
-    height: pointSize,
-    borderRadius: pointSize / 2,
-    backgroundColor: pointColor,
-  };
-
-  const animatedPointStyle = {
-    transform: [
-      {
-        translateX: pointAnimation.interpolate({
-          inputRange: [0, 1, 2, 3, 4, 5, 6],
-          outputRange: [
-            0,
-            containerSize / 2,
-            containerSize,
-            containerSize / 2,
-            0,
-            -containerSize / 2,
-            0,
-          ],
-        }),
-      },
-      {
-        translateY: pointAnimation.interpolate({
-          inputRange: [0, 1, 2, 3, 4, 5, 6],
-          outputRange: [
-            0,
-            0,
-            -containerSize / 2,
-            -containerSize,
-            -containerSize,
-            -containerSize / 2,
-            0,
-          ],
-        }),
-      },
-    ],
+  const buscarToken = () => {
+    console.log(AsyncStorage);
+    AsyncStorage.setItem('token', 'soy el token carajo');
+    // AsyncStorage.removeItem('token');
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.rowContainer}>
-        <View style={styles.emptyContainer} />
-        <View style={styles.emptyContainer} />
-        <View style={styles.emptyContainer} />
-      </View>
-      <View style={styles.rowContainer}>
-        <View style={styles.emptyContainer} />
-        <View style={pentagonStyle}>
-          <Animated.View style={[pointStyle, animatedPointStyle]} />
-        </View>
-        <View style={styles.emptyContainer} />
-      </View>
-      <View style={styles.rowContainer}>
-        <View style={styles.emptyContainer} />
-        <View style={styles.emptyContainer} />
-        <View style={styles.emptyContainer} />
+    <View style={menuStyles.container}>
+      <View style={menuStyles.bottomNavigationContainer}>
+        <BottomNavigation
+          navigationState={{index, routes}}
+          onIndexChange={setIndex}
+          renderScene={renderScene}
+          barStyle={{backgroundColor: theme.colors.primary}}
+          style={{width, height}}
+        />
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  emptyContainer: {
-    width: width / 3,
-    height: width / 3,
-  },
-});
-
-export default PentagonLine;
+export default Menus;

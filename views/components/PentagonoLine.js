@@ -5,10 +5,10 @@ const {width} = Dimensions.get('window');
 
 const PentagonLine = () => {
   const pointColor = 'rgb(222, 111, 47)';
-  const pointSize = 20;
-  const containerSize = width / 3;
+  const pointSize = 5;
+  const containerSize = 52;
   const pointDistance = containerSize * Math.sqrt(2);
-  const duration = 150;
+  const duration = 100;
   const pointAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const PentagonLine = () => {
   const pentagonStyle = {
     width: pointDistance,
     height: pointDistance,
-    transform: [{rotate: '0deg'}],
+    transform: [{rotate: '90deg'}],
     position: 'relative',
   };
 

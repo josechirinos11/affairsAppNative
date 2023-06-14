@@ -1,5 +1,11 @@
-import * as React from 'react';
-import {View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
+import React, {useEffect, useContext} from 'react';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+  Image,
+} from 'react-native';
 import {
   Modal,
   Portal,
@@ -13,40 +19,98 @@ import FormLogin from './components/FormLogin';
 import PentagonLine from './components/PentagonoLine';
 import Menus from './components/Menus';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppContext from '../AppContext';
+
 // apollo
 import {gql, useMutation} from '@apollo/client';
 const VALIDAD_TOKEN = gql`
-  mutation Mutation($input: ValidarToken) {
-    validarToken(input: $input)
+  mutation ValidarToken($input: ValidarToken) {
+    validarToken(input: $input) {
+      status
+      id
+      correo
+    }
   }
 `;
 
-const image = require('../img/logotech4.jpg');
+const AUTENTICAR_USUARIO = gql`
+  mutation AutenticarUsuario($input: AutenticarAccesoUsuario) {
+    autenticarUsuario(input: $input) {
+      token
+    }
+  }
+`;
+
+const image = require('../img/home/izquierda.jpg');
 const logo = require('./img/');
 const {width, height} = Dimensions.get('window');
 
 const Home = () => {
   console.log('desde el home');
 
-  const [vista, setVista] = React.useState('login');
+  const {appVariables, setAppVariables} = useContext(AppContext);
+  const {VISTA} = appVariables;
+  const [vista, setVista] = React.useState('entrar');
   const theme = useTheme();
+  console.log(`este es el valos de VISTA ${VISTA}`);
+
+  //mutation de apollo
+  const [validarToken] = useMutation(VALIDAD_TOKEN);
+
+  const validarAuthentication = async () => {
+    const TokenStorage = await AsyncStorage.getItem('token');
+    //guardar usuario
+    try {
+      const {data} = await validarToken({
+        variables: {
+          input: {
+            token: TokenStorage,
+          },
+        },
+      });
+
+      //console.log(data);
+      console.log(data.validarToken.correo);
+      console.log(data.validarToken.id);
+
+      setAppVariables({...appVariables, VISTA: 'entrar'});
+      console.log(`este es el valos de VISTA ${VISTA}`);
+      //setVisible(false);
+      return validarToken.usuario;
+    } catch (error) {
+      console.log(error.message);
+      //setVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    validarAuthentication();
+  }, []);
+
   return (
-    <View style={homeStyles.containerPrincipal}>
-      {vista === 'login' ? (
+    <View
+      style={[homeStyles.containerPrincipal, {width: width, height: height}]}>
+      {VISTA === 'login' ? (
         <ImageBackground
           source={image}
           resizeMode="cover"
           style={[homeStyles.image, {width: width, height: height}]}>
-          <Text
-            variant="displayLarge"
-            style={[{color: theme.colors.primary}, homeStyles.titulo]}>
-            AffairsApp
-          </Text>
+          <View style={homeStyles.container}>
+            <Image
+              source={require('../img/iconovercion4.png')}
+              style={homeStyles.icon}
+            />
+            <Text
+              variant="displayLarge"
+              style={[{color: theme.colors.primary}, homeStyles.titulo]}>
+              AffairsApp
+            </Text>
+          </View>
 
-          <FormLogin setVista={setVista} />
+          <FormLogin />
         </ImageBackground>
-      ) : vista === 'entrar' ? (
-        <Menus setVista={setVista} />
+      ) : VISTA === 'entrar' ? (
+        <Menus />
       ) : null}
     </View>
   );
