@@ -20,10 +20,22 @@ const homeStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  pentagono: {
+    position: 'absolute',
+    top: 120, // Ajusta la posición vertical según tus necesidades
+    left: 50, // Ajusta la posición horizontal según tus necesidades
+  },
+  icon: {
+    position: 'absolute',
+    top: 20, // Ajusta la posición vertical según tus necesidades
+    left: 10, // Ajusta la posición horizontal según tus necesidades
+    width: 24,
+    height: 24,
+  },
   titulo: {
     position: 'absolute',
     top: 0, // Ajusta la posición vertical según tus necesidades
-    left: 16, // Ajusta la posición horizontal según tus necesidades
+    left: 35, // Ajusta la posición horizontal según tus necesidades
     fontSize: 25, // Tamaño de fuente inicial
     minWidth: 20, // Ancho mínimo del texto
     maxWidth: 200, // Ancho máximo del texto
