@@ -52,13 +52,14 @@ const Home = () => {
   const {VISTA} = appVariables;
   const [vista, setVista] = React.useState('entrar');
   const theme = useTheme();
-  console.log(`este es el valos de VISTA ${VISTA}`);
+  console.log(`VALOR DE VISTA:   ${VISTA}`);
 
   //mutation de apollo
   const [validarToken] = useMutation(VALIDAD_TOKEN);
 
   const validarAuthentication = async () => {
     const TokenStorage = await AsyncStorage.getItem('token');
+    console.log(`VALOR DE TOKEN:   ${TokenStorage}`);
     //guardar usuario
     try {
       const {data} = await validarToken({
@@ -79,6 +80,7 @@ const Home = () => {
       return validarToken.usuario;
     } catch (error) {
       console.log(error.message);
+      setAppVariables({...appVariables, VISTA: 'login'});
       //setVisible(false);
     }
   };

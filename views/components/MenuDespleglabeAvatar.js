@@ -10,6 +10,7 @@ import {
   MD3Colors,
 } from 'react-native-paper';
 import AppContext from '../../AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MenuDespleglabeAvatar = ({setVista}) => {
   const {appVariables, setAppVariables} = useContext(AppContext);
@@ -23,9 +24,14 @@ const MenuDespleglabeAvatar = ({setVista}) => {
 
   const theme = useTheme();
 
-  const salir = () => {
+  const salir = async () => {
+
     console.log('salir');
+    const salida = ""
+    
     setAppVariables({...appVariables, VISTA: 'login'});
+    await AsyncStorage.setItem('token', salida);
+ 
   };
 
   return (
