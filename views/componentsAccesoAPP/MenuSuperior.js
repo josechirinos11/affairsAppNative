@@ -13,7 +13,7 @@ import {
 import menuSuperiorStyles from '../../styles/menuSuperiorStyles';
 import homeStyles from '../../styles/homeStyles';
 import MyAvatar from './MyAvatar';
-import Menudesplegable from './Menudesplegable';
+import Menu3rayas from './Menu3rayas';
 import MenuDespleglabeAvatar from './MenuDespleglabeAvatar';
 
 const MenuSuperior = () => {
@@ -22,8 +22,12 @@ const MenuSuperior = () => {
     <PaperProvider>
       <View style={menuSuperiorStyles.containerMenu}>
         <View style={menuSuperiorStyles.leftContainer}>
+          <Menu3rayas />
+          
+        </View>
+        <View style={menuSuperiorStyles.centerContainer}>
           <Image
-            source={require('../../img/iconovercion4.png')}
+            source={require('../../img/iconovercion1.png')}
             style={menuSuperiorStyles.icon}
           />
           <Text
@@ -33,8 +37,9 @@ const MenuSuperior = () => {
           </Text>
         </View>
 
+        
         <View style={menuSuperiorStyles.rightContainer}>
-          <Menudesplegable />
+          
           <MenuDespleglabeAvatar />
         </View>
       </View>

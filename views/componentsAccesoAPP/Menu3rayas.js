@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import * as React from 'react';
 import {View, Image} from 'react-native';
 import {
   Button,
@@ -9,13 +9,8 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
-import AppContext from '../../AppContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MenuDespleglabeAvatar = ({setVista}) => {
-  const {appVariables, setAppVariables} = useContext(AppContext);
-  const {VISTA} = setAppVariables;
-
+const Menu3rayas = () => {
   const [visible, setVisible] = React.useState(false);
 
   const openMenu = () => setVisible(true);
@@ -23,26 +18,15 @@ const MenuDespleglabeAvatar = ({setVista}) => {
   const closeMenu = () => setVisible(false);
 
   const theme = useTheme();
-
-  const salir = async () => {
-
-    console.log('salir');
-    const salida = ""
-    
-    setAppVariables({...appVariables, VISTA: 'login'});
-    await AsyncStorage.setItem('token', salida);
- 
-  };
-
   return (
     <>
       <View
         style={{
           flex: 1,
           flexDirection: 'row',
-          justifyContent: 'center',
+          
           alignItems: 'center',
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-start',
         }}>
         <Menu
           style={{
@@ -54,7 +38,7 @@ const MenuDespleglabeAvatar = ({setVista}) => {
             <IconButton
               icon={() => (
                 <Image
-                  source={require('../../img/usuario.png')}
+                  source={require('../../img/rayas.png')}
                   style={{width: 24, height: 24}}
                 />
               )}
@@ -63,15 +47,15 @@ const MenuDespleglabeAvatar = ({setVista}) => {
               size={24}
               onPress={openMenu}></IconButton>
           }>
-          <Menu.Item onPress={() => {}} title="Ajustes" />
+          <Menu.Item onPress={() => {}} title="Administracion" />
           <Divider />
-          <Menu.Item onPress={() => {}} title="Suscripcion" />
+          <Menu.Item onPress={() => {}} title="Empleados" />
           <Divider />
-          <Menu.Item onPress={salir} title="Salir" />
+          <Menu.Item onPress={() => {}} title="Servicios" />
         </Menu>
       </View>
     </>
   );
 };
 
-export default MenuDespleglabeAvatar;
+export default Menu3rayas;

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {
   Modal,
   Portal,
@@ -8,14 +8,63 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+const {width, height} = Dimensions.get('window');
+
 const homeStyles = StyleSheet.create({
-  container: {
+  cardContainer: {
+    borderRadius: 15,
+  
+    
+    flex: 8,
+    width: '50%',
+    paddingLeft: 5,
+    height: '100%',
+
+  },
+  cardContainerUnitario: {
+    paddingBottom: 5,
+    paddingTop: 5,
+    
+    
+
+  },
+  surface: {
+    padding: 8,
+    height: 80,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerDialog: {
+   top:200,
+   textAlign: 'center',
+   justifyContent: 'center',
+      alignItems: 'center',
+  },
+  snackbarText: {
+    textAlign: 'left',
+  },
+  
+    containerSnackbar: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      textAlign: 'left',
+    
+  },
+  containerSuperior: {
+  
     flex: 1,
-    paddingTop: 20,
+    
     justifyContent: 'flex-start',
     alignItems: 'center',
+    height:'100%'
   },
   containerPrincipal: {
+   
     flex: 1,
     width: '100%',
     height: '100%',
@@ -63,19 +112,34 @@ const homeStyles = StyleSheet.create({
     textShadowRadius: 5,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 0,
+    
+  
+    
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
-    paddingHorizontal: 10, // Ajusta el espacio horizontal entre los botones según tus necesidades
-    paddingBottom: 20, // Ajusta el espacio inferior entre los botones según tus necesidades
+    height:'100%',
+   
   },
   buton: {
     flex: 1, // Distribuye el espacio disponible de manera igual entre los botones
-    margin: 5, // Ajusta el margen entre los botones según tus necesidades
+    margin: 10, // Ajusta el margen entre los botones según tus necesidades
+    
+
+  },
+  searchIcon: {
+    width: 24,
+    height: 24,
+  },
+  containerSearchbar: {
+    height: 40,
+    marginBottom: 5,
+    paddingTop: 0,
+    marginTop: 0,
+    
+    
   },
 });
 

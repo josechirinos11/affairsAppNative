@@ -1,6 +1,6 @@
 const css = {
   colors: {
-    primary: 'rgb(222, 111, 47)',
+    primary: 'rgb(250, 148, 90)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(191, 127, 90)',
     onPrimaryContainer: 'rgb(214, 91, 19)',
@@ -31,7 +31,7 @@ const css = {
     inversePrimary: 'rgb(196, 122, 79)',
     elevation: {
       level0: 'transparent',
-      level1: 'rgb(248, 242, 251)',
+      level1: 'rgb(250, 148, 90)',
       level2: 'rgb(196, 122, 79)',
       level3: 'rgb(240, 231, 246)',
       level4: 'rgb(239, 229, 245)',

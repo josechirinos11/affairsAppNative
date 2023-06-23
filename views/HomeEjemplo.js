@@ -108,23 +108,25 @@ const Home = () => {
 
 
 
-const [scrollViewOffset, setScrollViewOffset] = useState(0);
+  
 
 // Referencia al componente ScrollView
 const scrollViewRef = useRef(null);
-const scrollOffsetRef = useRef(0);
 
+
+// Función para desplazar automáticamente los cards hacia arriba
 const scrollCards = () => {
-  scrollOffsetRef.current += 1;
-  scrollViewRef.current?.scrollTo({ x: 0, y: scrollOffsetRef.current, animated: true });
+ 
+  scrollViewRef.current.scrollTo({ x: 0, y: 400, animated: true });
 };
+
 
 
 // Desplazar automáticamente los cards después de 3 segundos
 useEffect(() => {
   const interval = setInterval(() => {
     scrollCards();
-  }, 100);
+  }, 1000);
 
   return () => clearInterval(interval);
 }, []);
@@ -170,9 +172,10 @@ useEffect(() => {
 
 
 <ScrollView
-  ref={scrollViewRef}
-  showsVerticalScrollIndicator={false}
->
+              ref={scrollViewRef}
+             
+              showsVerticalScrollIndicator={false}
+            >
               <View style={homeStyles.cardContainerUnitario}>
               <Card>
                 <Card.Title title="Poducto" subtitle="Culumpios" left={LeftContent} />

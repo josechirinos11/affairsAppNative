@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
-import MenuSuperior from './views/components/MenuSuperior';
+import MenuSuperior from './views/componentsAccesoAPP/MenuSuperior';
 import css from './styles/global';
 import AppContext from './AppContext';
 

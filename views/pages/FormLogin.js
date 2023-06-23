@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react';
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import {
+  Surface,
+  Dialog,
   Modal,
   Portal,
   Text,
@@ -12,8 +14,9 @@ import {
 import homeStyles from '../../styles/homeStyles';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MensajeBaner from './MensajeBaner';
+import MensajeBaner from '../componentsAccesoAPP/MensajeBaner';
 import AppContext from '../../AppContext';
+import Mensaje from './componentsPages/Mensaje'
 
 // apollo
 import {gql, useMutation} from '@apollo/client';
@@ -94,6 +97,7 @@ const FormLogin = () => {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // boton de logearse
   const login = async () => {
+
     // validar
     if (usuario === '' || password === '') {
       showMessage('todos los campos son obligatorios');
@@ -243,7 +247,7 @@ const FormLogin = () => {
             onDismiss={hideModal}
             contentContainerStyle={containerStyle}>
             <Text style={{textAlign: 'center', color: theme.colors.primary}}>
-              Ingrese sus datos
+              LOGIN
             </Text>
             <TextInput
               style={{backgroundColor: theme.colors.onPrimary}}
@@ -251,26 +255,32 @@ const FormLogin = () => {
               label="Correo"
               value={usuario}
               onChangeText={setUsuario}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
             <TextInput
               style={{backgroundColor: theme.colors.onPrimary}}
               label="Password"
               value={password}
               onChangeText={setPassword}
+              secureTextEntry 
             />
 
-            <Button mode="contained" style={{marginTop: 30}} onPress={login}>
+            <Button
+             textColor="white"
+             mode="elevated"
+             style={{marginTop: 30}}
+              onPress={login}>
               ACEPTAR
             </Button>
-            <Snackbar
-              style={{position: 'absolute', top: 0, alignSelf: 'center'}}
-              visible={visibleMensaje}
-              onDismiss={hideMessage}
-              duration={5000}
-              action={{
-                label: textoMensaje,
-                onPress: hideMessage,
-              }}></Snackbar>
+
+            <Mensaje
+             visible={visibleMensaje}
+             onDismiss={hideMessage}
+             textoMensaje={textoMensaje}
+             theme={theme}
+            />
+
           </Modal>
         )}
         {entrar_Registrar === 'registrar' &&
@@ -281,46 +291,45 @@ const FormLogin = () => {
               onDismiss={hideModal}
               contentContainerStyle={containerStyle}>
               <Text style={{textAlign: 'center', color: theme.colors.primary}}>
-                Registrarse
+                REGISTRARSE
               </Text>
-              <Snackbar
-                style={{position: 'absolute', top: 0, alignSelf: 'center'}}
-                visible={visibleMensaje}
-                onDismiss={hideMessage}
-                duration={5000}
-                action={{
-                  label: textoMensaje,
-                  onPress: hideMessage,
-                }}></Snackbar>
+              <Mensaje
+             visible={visibleMensaje}
+             onDismiss={hideMessage}
+             textoMensaje={textoMensaje}
+             theme={theme}
+            />
               <TextInput
+                
                 style={{backgroundColor: theme.colors.onPrimary}}
                 mode="flat"
                 label="Correo"
                 value={usuario}
                 onChangeText={setUsuario}
+                keyboardType="email-address"
+              autoCapitalize="none"
               />
               <TextInput
                 style={{backgroundColor: theme.colors.onPrimary}}
                 label="Password"
                 value={password}
                 onChangeText={setPassword}
+                secureTextEntry 
               />
 
               <Button
-                mode="contained"
+                textColor="white"
+                mode="elevated"
                 style={{marginTop: 30}}
                 onPress={verificacionUsuario}>
                 ACEPTAR
               </Button>
-              <Snackbar
-                style={{position: 'absolute', top: 0, alignSelf: 'center'}}
-                visible={visibleMensaje}
-                onDismiss={hideMessage}
-                duration={5000}
-                action={{
-                  label: textoMensaje,
-                  onPress: hideMessage,
-                }}></Snackbar>
+              <Mensaje
+             visible={visibleMensaje}
+             onDismiss={hideMessage}
+             textoMensaje={textoMensaje}
+             theme={theme}
+            />
             </Modal>
           )}
         {entrar_Registrar === 'registrar' &&
@@ -333,21 +342,20 @@ const FormLogin = () => {
               <Text style={{textAlign: 'center', color: theme.colors.primary}}>
                 Verificacion de Email,
               </Text>
-              <Snackbar
-                style={{position: 'absolute', top: 0, alignSelf: 'center'}}
-                visible={visibleMensaje}
-                onDismiss={hideMessage}
-                duration={5000}
-                action={{
-                  label: textoMensaje,
-                  onPress: hideMessage,
-                }}></Snackbar>
+              <Mensaje
+             visible={visibleMensaje}
+             onDismiss={hideMessage}
+             textoMensaje={textoMensaje}
+             theme={theme}
+            />
               <TextInput
                 style={{backgroundColor: theme.colors.onPrimary}}
                 mode="flat"
                 label="Escribe el codigo enviado"
                 value={codigo}
                 onChangeText={setCodigo}
+                keyboardType="numeric"
+              autoCapitalize="none"
               />
 
               <Button
@@ -356,29 +364,41 @@ const FormLogin = () => {
                 onPress={registrarUsuario}>
                 Verificar
               </Button>
-              <Snackbar
-                style={{position: 'absolute', top: 0, alignSelf: 'center'}}
-                visible={visibleMensaje}
-                onDismiss={hideMessage}
-                duration={5000}
-                action={{
-                  label: textoMensaje,
-                  onPress: hideMessage,
-                }}></Snackbar>
+              <Mensaje
+             visible={visibleMensaje}
+             onDismiss={hideMessage}
+             textoMensaje={textoMensaje}
+             theme={theme}
+            />
             </Modal>
           )}
       </Portal>
 
+    
+
+
+
+
       <View style={homeStyles.buttonContainer}>
+
+
+    
+
+
+   
         <Button
+          textColor="white"
+          mode="elevated"
           style={homeStyles.buton}
-          mode="contained"
+          
           onPress={showModalEntrar}>
           Entrar
         </Button>
+    
         <Button
           style={homeStyles.buton}
-          mode="contained"
+          textColor="white"
+          mode="elevated"
           onPress={showModalRegistrar}>
           Registrarse
         </Button>

@@ -20,7 +20,7 @@ const menuSuperiorStyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
   },
-  leftContainer: {
+  centerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 5,
@@ -29,9 +29,15 @@ const menuSuperiorStyles = StyleSheet.create({
   rightContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 10,
+    
     flex: 1, // Añadir flex: 1 para ocupar el espacio restante
     justifyContent: 'flex-end', // Alinear los elementos a la derecha
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start', // Cambiar de 'flex-end' a 'flex-start' para alinear a la izquierda
+    flex: 1, // Añadir flex: 1 para ocupar el espacio restante
   },
 
   titulo: {

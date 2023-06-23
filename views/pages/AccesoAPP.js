@@ -2,14 +2,15 @@ import React, {useState, useContext} from 'react';
 import {BottomNavigation, Text, Button, useTheme} from 'react-native-paper';
 import {Image, View, Dimensions} from 'react-native';
 import menuStyles from '../../styles/menuStyles';
-import MenuSuperior from './MenuSuperior';
+import MenuSuperior from '../componentsAccesoAPP/MenuSuperior';
 import homeStyles from '../../styles/homeStyles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Clientes from '../pages/Clientes';
-import Productos from '../pages/Productos';
-import Proveedores from '../pages/Proveedores';
-import Empresas from '../pages/Empresas';
+import Clientes from './Clientes';
+import Productos from './Productos';
+import Proveedores from './Proveedores';
+import Empresas from './Empresas';
+
 
 const {width, height} = Dimensions.get('window');
 const ClientesIcon = () => (
@@ -85,11 +86,12 @@ const Menus = () => {
     <View style={menuStyles.container}>
       <View style={menuStyles.bottomNavigationContainer}>
         <BottomNavigation
+       
           navigationState={{index, routes}}
           onIndexChange={setIndex}
           renderScene={renderScene}
           barStyle={{backgroundColor: theme.colors.primary}}
-          style={{width, height}}
+         
         />
       </View>
     </View>

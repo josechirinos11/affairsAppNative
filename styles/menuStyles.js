@@ -7,6 +7,7 @@ const menuStyles = StyleSheet.create({
   },
   bottomNavigationContainer: {
     flex: 1,
+    
   },
   container: {
     flex: 1,

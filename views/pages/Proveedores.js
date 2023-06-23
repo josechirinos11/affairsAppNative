@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
-import MenuSuperior from '../components/MenuSuperior';
+import MenuSuperior from '../componentsAccesoAPP/MenuSuperior';
 
 const Proveedores = () => {
   console.log('desde Proveedores');
